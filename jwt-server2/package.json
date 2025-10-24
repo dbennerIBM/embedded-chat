@@ -1,0 +1,10 @@
+{
+  "name": "code-engine-jwt-function",
+  "version": "1.0.0",
+  "description": "A Code Engine function to generate encrypted JWTs.",
+  "main": "index.js",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^10.0.0"
+  }
+}
