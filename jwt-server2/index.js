@@ -14,12 +14,16 @@ const TIME_45_DAYS = 1000 * 60 * 60 * 24 * 45;
  */
 function createJWTString(anonymousUserID, sessionInfo, context) {
   // Get keys from environment variables
-  const PRIVATE_KEY = process.env.CLIENT_PRIVATE_KEY;
-  const PUBLIC_KEY = process.env.CLIENT_PUBLIC_KEY;
-  
-  if (!PRIVATE_KEY || !PUBLIC_KEY) {
-    throw new Error('Missing CLIENT_PRIVATE_KEY or CLIENT_PUBLIC_KEY environment variables');
+  // DECODE THE BASE64-ENCODED KEYS
+  const PRIVATE_KEY_B64 = process.env.CLIENT_PRIVATE_KEY_B64;
+  const PUBLIC_KEY_B64 = process.env.CLIENT_PUBLIC_KEY_B64;
+
+  if (!PRIVATE_KEY_B64 || !PUBLIC_KEY_B64) {
+    throw new Error('Missing CLIENT_PRIVATE_KEY_B64 or CLIENT_PUBLIC_KEY_B64 environment variables');
   }
+
+  const PRIVATE_KEY = Buffer.from(PRIVATE_KEY_B64, 'base64').toString('utf-8');
+  const PUBLIC_KEY = Buffer.from(PUBLIC_KEY_B64, 'base64').toString('utf-8');
 
   // This is the content of the JWT
   const jwtContent = {
@@ -58,7 +62,7 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
   // Now sign the jwt content to make the actual jwt
   const jwtString = jwt.sign(jwtContent, PRIVATE_KEY, {
     algorithm: 'RS256',
-    expiresIn: '10000000s',
+    expiresIn: '45d', // FIX: Use a duration string that matches your constant
   });
 
   return jwtString;
@@ -72,7 +76,8 @@ function getOrCreateAnonymousID(existingId) {
     return existingId;
   }
   // Create a new anonymous ID
-  return `anon-${uuid().substr(0, 5)}`;
+  // FIX: .substr() is deprecated, use .slice()
+  return `anon-${uuid().slice(0, 5)}`;
 }
 
 /**
@@ -93,10 +98,14 @@ function main(args) {
     if (args.user_id) {
       // Direct query parameter
       anonymousUserID = args.user_id;
-    } else if (args.__ow_query && args.__ow_query.includes('user_id=')) {
-      // Parse from query string
-      const params = new URLSearchParams(args.__ow_query);
-      anonymousUserID = params.get('user_id');
+    } else if (args.__ow_query) {
+      // Parse from query string (e.g., "?user_id=123")
+      // Check for '?' and remove it if present
+      const queryString = args.__ow_query.startsWith('?') ? args.__ow_query.substring(1) : args.__ow_query;
+      const params = new URLSearchParams(queryString);
+      if (params.has('user_id')) {
+        anonymousUserID = params.get('user_id');
+      }
     } else if (args.anonymousUserId) {
       // Fallback to body parameter
       anonymousUserID = args.anonymousUserId;
@@ -124,7 +133,7 @@ function main(args) {
       headers: { 
         'Content-Type': 'application/json',
         // Include cookie header if you want to set the anonymous ID cookie
-        'Set-Cookie': `ANONYMOUS-USER-ID=${anonymousUserID}; Max-Age=${TIME_45_DAYS / 1000}; HttpOnly; Path=/`
+        'Set-Cookie': `ANONYMOUS-USER-ID=${anonymousUserID}; Max-Age=${Math.floor(TIME_45_DAYS / 1000)}; HttpOnly; Path=/`
       },
       body: {
         token: token,
