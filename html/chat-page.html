@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Benner - Technology Career Portfolio</title>
+    
+    <!-- Watson Orchestrate Script will load here upon successful authentication-->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        nav a:hover {
+            color: #667eea;
+        }
+        
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-toggle {
+            background: none;
+            border: none;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+        }
+        
+        .dropdown-toggle:hover {
+            color: #667eea;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            min-width: 200px;
+            display: none;
+            margin-top: 0.5rem;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #555;
+            transition: background 0.3s;
+        }
+        
+        .dropdown-menu a:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+        
+        .dropdown-menu a:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .dropdown-menu a:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+        
+        /* User Profile Section */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            background: #f8f9fa;
+            border-radius: 50px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .user-status {
+            font-size: 0.75rem;
+            color: #28a745;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .hero-section {
+            background: white;
+            border-radius: 20px;
+            padding: 4rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Cards Section */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .card-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Root element for Watson Orchestrate */
+        #root {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-text {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<!-- 
+      STEP 1: 
+      This is the DIV where the watsonx Orchestrate chat will be rendered.
+      The 'id="root"' matches the "rootElementID" in your configuration object.
+    -->
+    <div id="root"></div>
+
+    <!-- 
+      STEP 2:
+      This is your entire chat configuration and logic script.
+    -->
+    <script>
+        function getUserId() {
+            let embed_user_id = getCookie('embed_user_id');
+            if (!embed_user_id) {
+                embed_user_id = `anon-client-${Math.trunc(Math.random() * 1000000)}`;
+                setCookie('embed_user_id', embed_user_id);
+            }
+            return embed_user_id;
+        }
+
+        function getCookie(name) {
+            console.log('getCookie');
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function setCookie(name, value) {
+            document.cookie = `${name}=${value}; path=/`;
+        }
+
+        // --- All your event handlers ---
+        function preSendHandler(event) {
+            if (event?.message?.content) {
+                event.message.content = event.message.content.toUpperCase();
+            }
+        }
+
+        function sendHandler(event) {
+            console.log('send event', event);
+        }
+
+        function feedbackHandler(event) {
+            console.log('feedback', event);
+        }
+
+        function preReceiveHandler(event) {
+            event?.content?.map((element) => {
+                element.type = 'date';
+            });
+        }
+
+        function receiveHandler(event) {
+            console.log('received event', event);
+        }
+
+        function userDefinedResponseHandler(event) {
+            console.log('userDefinedResponse event', event);
+            event.hostElement.innerHTML = `
+                <cds-code-snippet>
+                    node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis,
+                    veritatis voluptate id incidunt molestiae officia possimus, quasi itaque
+                    alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae
+                    laboriosam!
+                </cds-code-snippet>
+                <br><br>
+                <div style="background-color:orange;color:white;padding:10px;">
+                    <p>${event.contentItem?.template || '[No message content]'}</p>
+                </div>`;
+        }
+
+        function onChatLoad(instance) {
+            instance.on('chatstarted', (instance) => {
+                window.wxoChatInstance = instance;
+            });
+            instance.on('pre:send', preSendHandler);
+            instance.on('send', sendHandler);
+            instance.on('pre:receive', preReceiveHandler);
+            instance.on('receive', receiveHandler);
+            instance.on('feedback', feedbackHandler);
+            instance.on('userDefinedResponse', userDefinedResponseHandler);
+        }
+
+        //
+        // *** THIS IS THE MODIFIED FUNCTION ***
+        //
+        async function getIdentityToken() {
+            // *** STEP 3: REPLACE THIS URL ***
+            // Replace this placeholder with your actual IBM Cloud Code Engine function URL.
+            // It should look like: https://YOUR-FUNCTION-NAME.xyz.us-south.codeengine.appdomain.cloud
+            const codeEngineUrl = "https://function-c9.1c23jjxxh2ou.us-south.codeengine.appdomain.cloud/createJWT";
+
+            console.log('Requesting token from Code Engine...');
+            
+            try {
+                // This makes a call to your server (Code Engine) to request a new JWT.
+                // It passes the user ID from the getUserId() function as a query parameter.
+                const response = await fetch(
+                    `${codeEngineUrl}?user_id=${getUserId()}`
+                );
+
+                if (!response.ok) {
+                    // If the server response is not 200 OK, throw an error.
+                    const errorText = await response.text();
+                    throw new Error(`Failed to fetch JWT: ${response.status} ${response.statusText}. Response: ${errorText}`);
+                }
+
+                // Your function returns JSON ("body: { token: ... }"), so we MUST use response.json()
+                const data = await response.json();
+
+                if (!data.token) {
+                    throw new Error("Invalid response from token server. 'token' field is missing.");
+                }
+
+                // Your JWT is in the 'token' property of the response body.
+                // We assign it to the chat configuration object.
+                window.wxOConfiguration.token = data.token;
+
+                console.log("Successfully fetched and set identity token.");
+
+            } catch (error) {
+                console.error("Error getting identity token:", error);
+                
+                // Display an error in the chat window if auth fails
+                document.getElementById("root").innerHTML = 
+                    `<div style="padding: 20px; text-align: center; color: red;">
+                        <strong>Authentication Error</strong>
+                        <p>Could not load chat. Please check the console for details and try refreshing the page.</p>
+                    </div>`;
+
+                // Re-throw the error to stop the .then() block from executing
+                throw error;
+            }
+        }
+
+        // --- This is the chat configuration ---
+        window.wxOConfiguration = {
+            orchestrationID: "22fbea2f8f6673a0b658e7b0cfd612b9_7d8ad848-5570-443c-b964-849b503989d7",
+            hostURL: "https://us-south.watson-orchestrate.cloud.ibm.com",
+            rootElementID: "container",
+            showLauncher: true,
+            crn: "crn:v1:bluemix:public:watsonx-orchestrate:us-south:a/22fbea2f8f6673a0b658e7b0cfd612b9:7d8ad848-5570-443c-b964-849b503989d7::",
+            deploymentPlatform: "ibmcloud",
+            chatOptions: {
+                agentId: "bbdc8a28-3f9c-494b-ba88-4476c37d8fe3",
+                agentEnvironmentId: "c085ea0b-2167-4149-9aa3-8aae075d226d",
+                onLoad: onChatLoad
+            },
+            // The 'token' property will be added here by getIdentityToken()
+        };
+
+        // --- This code block kicks everything off ---
+        console.log("Starting authentication process...");
+        getIdentityToken().then(() => {
+            // This .then() only runs if getIdentityToken() was successful
+            console.log("Authentication complete. Loading chat script...");
+            const script = document.createElement("script");
+            script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+            script.addEventListener("load", function () {
+                wxoLoader.init();
+            });
+            document.head.appendChild(script);
+        }).catch(error => {
+            // This will catch any errors from getIdentityToken()
+            console.error("Failed to initialize chat due to auth error.");
+        });
+    </script>
+
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">TechPortfolio</div>
+            
+            <nav>
+                <a href="#" onclick="event.preventDefault()">Home</a>
+                <a href="#" onclick="event.preventDefault()">About</a>
+                <a href="#" onclick="event.preventDefault()">Experience</a>
+                
+                <!-- Dropdown Menu -->
+                <div class="dropdown">
+                    <button class="dropdown-toggle" onclick="toggleDropdown('projectsDropdown')">
+                        Projects ▼
+                    </button>
+                    <div class="dropdown-menu" id="projectsDropdown">
+                        <a href="#" onclick="event.preventDefault()">AI & Machine Learning</a>
+                        <a href="#" onclick="event.preventDefault()">Cloud Architecture</a>
+                        <a href="#" onclick="event.preventDefault()">DevOps Solutions</a>
+                        <a href="#" onclick="event.preventDefault()">Open Source</a>
+                    </div>
+                </div>
+                
+                <a href="#" onclick="event.preventDefault()">Contact</a>
+                
+                <!-- User Profile -->
+                <div class="user-profile">
+                    <div class="user-avatar">DB</div>
+                    <div class="user-info">
+                        <span class="user-name">Daniel Benner</span>
+                        <span class="user-status">● Logged In</span>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" onclick="toggleDropdown('userDropdown')" style="padding: 0;">
+                            ▼
+                        </button>
+                        <div class="dropdown-menu" id="userDropdown">
+                            <a href="#" onclick="event.preventDefault()">Profile Settings</a>
+                            <a href="#" onclick="event.preventDefault()">Dashboard</a>
+                            <a href="#" onclick="event.preventDefault()">Messages</a>
+                            <a href="#" onclick="event.preventDefault()">Sign Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">Daniel Benner</h1>
+            <h2 class="hero-subtitle">Technology Leader & Innovation Architect</h2>
+            <p class="hero-description">
+                With over two decades of experience in technology leadership, I've dedicated my career to 
+                driving digital transformation and building innovative solutions that scale. From architecting 
+                cloud-native applications to leading cross-functional teams, my journey in technology has been 
+                marked by a passion for solving complex problems and delivering exceptional results.
+            </p>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="alert('This is a mock button for testing')">
+                    Explore My Work
+                </button>
+                <button class="btn btn-secondary" onclick="alert('This is a mock button for testing')">
+                    Download Resume
+                </button>
+            </div>
+        </div>
+        
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🚀</div>
+                <h3 class="card-title">Cloud Architecture</h3>
+                <p class="card-description">
+                    Designed and implemented enterprise-scale cloud solutions on AWS, Azure, and IBM Cloud, 
+                    optimizing for performance, security, and cost-effectiveness.
+                </p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3 class="card-title">AI & Automation</h3>
+                <p class="card-description">
+                    Led the integration of AI-powered solutions including Watson Orchestrate, implementing 
+                    intelligent automation that reduced operational overhead by 60%.
+                </p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <h3 class="card-title">Team Leadership</h3>
+                <p class="card-description">
+                    Built and mentored high-performing engineering teams across multiple continents, 
+                    fostering a culture of innovation and continuous improvement.
+                </p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">💡</div>
+                <h3 class="card-title">Digital Innovation</h3>
+                <p class="card-description">
+                    Pioneered digital transformation initiatives that modernized legacy systems and 
+                    introduced cutting-edge technologies to traditional industries.
+                </p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🔒</div>
+                <h3 class="card-title">Cybersecurity</h3>
+                <p class="card-description">
+                    Implemented comprehensive security frameworks and protocols, ensuring data protection 
+                    and regulatory compliance across all technology stacks.
+                </p>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3 class="card-title">Data Strategy</h3>
+                <p class="card-description">
+                    Developed data-driven strategies that leverage analytics and machine learning to 
+                    deliver actionable insights and drive business decisions.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Additional Section -->
+        <div class="hero-section">
+            <h2 style="margin-bottom: 1rem;">Ready to Connect?</h2>
+            <p style="color: #666; margin-bottom: 2rem;">
+                I'm always interested in discussing new opportunities, innovative projects, and ways to leverage 
+                technology for positive impact. Whether you're looking for technical expertise, strategic guidance, 
+                or partnership opportunities, let's explore how we can work together.
+            </p>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="alert('Contact form would open here')">
+                    Get In Touch
+                </button>
+                <button class="btn btn-secondary" onclick="alert('Calendar scheduling would open here')">
+                    Schedule a Call
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2025 Daniel Benner - Technology Portfolio | All Rights Reserved</p>
+    </footer>
+    
+    <!-- Root element for Watson Orchestrate -->
+    <div id="root"></div>
+    
+    <!-- JavaScript for dropdown functionality -->
+    <script>
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const allDropdowns = document.querySelectorAll('.dropdown-menu');
+            
+            // Close all other dropdowns
+            allDropdowns.forEach(d => {
+                if (d.id !== dropdownId) {
+                    d.classList.remove('show');
+                }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('show');
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                const dropdowns = document.querySelectorAll('.dropdown-menu');
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
