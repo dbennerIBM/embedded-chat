@@ -28,7 +28,7 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
   // This is the content of the JWT
   const jwtContent = {
     // This is the subject of the JWT which will be the ID of the user
-    sub: anonymousUserID,
+    sub: "dbenner@us.ibm.com",
     // This object is optional and contains any data you wish to include as part of the JWT
     user_payload: {
       custom_message: 'Welcome to the multiverse, Daniel',
