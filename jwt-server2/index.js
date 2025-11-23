@@ -28,7 +28,7 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
   // This is the content of the JWT
   const jwtContent = {
     // This is the subject of the JWT which will be the ID of the user
-    sub: "dbenner@us.ibm.com",
+    sub: anonymousUserID,
     // This object is optional and contains any data you wish to include as part of the JWT
     user_payload: {
       custom_message: 'Welcome to the multiverse, Daniel',
@@ -119,10 +119,9 @@ function main(args) {
     
     // Context can be customized or use defaults
     const context = {
-      wxo_user_name: anonymousUserID,
-      name: "Daniel Benner",
-      rank: "noob",
-      planet: "Earth"
+      "name": "Daniel Benner",
+      "rank": "noob",
+      "planet": "Earth"
     };
 
     // Generate the JWT
