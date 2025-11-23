@@ -34,12 +34,7 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
       custom_message: 'Welcome to the multiverse, Daniel',
       name: 'The System',
     },
-    context: {
-      wxo_user_name: anonymousUserID,
-      name: "Daniel Benner",
-      rank: "noob",
-      planet: "Earth"
-    }
+    context
   };
 
   // If the user is authenticated, then add the user's real info to the JWT
@@ -123,7 +118,7 @@ function main(args) {
     const sessionInfo = args.sessionInfo || null;
     
     // Context can be customized or use defaults
-    const context = args.context || {
+    const context = {
       wxo_user_name: anonymousUserID,
       name: "Daniel Benner",
       rank: "noob",
