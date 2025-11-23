@@ -33,6 +33,9 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
     user_payload: {
       custom_message: 'Welcome to the multiverse, Daniel',
       name: 'The System',
+      message: {
+        context: context
+      }
     },
     context
   };
