@@ -31,12 +31,10 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
     sub: anonymousUserID,
     // This object is optional and contains any data you wish to include as part of the JWT
     user_payload: {
-      custom_message: 'Encrypted message',
-      name: 'Anonymous',
+      custom_message: 'Welcome to the multiverse, Daniel',
+      name: 'The System',
     },
-    name: "Daniel Benner",
-    rank: "noob",
-    planet: "Earth"
+    context
   };
 
   // If the user is authenticated, then add the user's real info to the JWT
@@ -121,9 +119,9 @@ function main(args) {
     
     // Context can be customized or use defaults
     const context = args.context || {
-      dev_id: 23424,
-      dev_name: "Name",
-      is_active: true
+      name: "Daniel Benner",
+      rank: "noob",
+      planet: "Earth"
     };
 
     // Generate the JWT
