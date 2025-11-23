@@ -34,7 +34,12 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
       custom_message: 'Welcome to the multiverse, Daniel',
       name: 'The System',
     },
-    context
+    context: {
+      wxo_user_name: anonymousUserID,
+      name: "Daniel Benner",
+      rank: "noob",
+      planet: "Earth"
+    }
   };
 
   // If the user is authenticated, then add the user's real info to the JWT
