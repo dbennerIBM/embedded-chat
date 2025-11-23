@@ -34,7 +34,11 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
       custom_message: 'Welcome to the multiverse, Daniel',
       name: 'The System',
     },
-    context
+    context: {
+      name: "Daniel Benner",
+      rank: "noob",
+      planet: "Earth"
+    }
   };
 
   // If the user is authenticated, then add the user's real info to the JWT
@@ -119,9 +123,9 @@ function main(args) {
     
     // Context can be customized or use defaults
     const context = {
-      "name": "Daniel Benner",
-      "rank": "noob",
-      "planet": "Earth"
+      name: "Daniel Benner",
+      rank: "noob",
+      planet: "Earth"
     };
 
     // Generate the JWT
