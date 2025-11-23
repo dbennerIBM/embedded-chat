@@ -119,6 +119,7 @@ function main(args) {
     
     // Context can be customized or use defaults
     const context = args.context || {
+      wxo_user_name: anonymousUserID,
       name: "Daniel Benner",
       rank: "noob",
       planet: "Earth"

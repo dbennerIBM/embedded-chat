@@ -305,15 +305,8 @@
     </style>
 </head>
 <body>
-<!-- 
-      STEP 1: 
-      This is the DIV where the watsonx Orchestrate chat will be rendered.
-      The 'id="root"' matches the "rootElementID" in your configuration object.
-    -->
-    <div id="root"></div>
-
     <!-- 
-      STEP 2:
+      STEP 1:
       This is your entire chat configuration and logic script.
     -->
     <script>
@@ -393,7 +386,7 @@
         // *** THIS IS THE MODIFIED FUNCTION ***
         //
         async function getIdentityToken() {
-            // *** STEP 3: REPLACE THIS URL ***
+            // *** STEP 2: REPLACE THIS URL ***
             // Replace this placeholder with your actual IBM Cloud Code Engine function URL.
             // It should look like: https://YOUR-FUNCTION-NAME.xyz.us-south.codeengine.appdomain.cloud
             const codeEngineUrl = "https://function-c9.1c23jjxxh2ou.us-south.codeengine.appdomain.cloud/createJWT";
@@ -445,13 +438,13 @@
         window.wxOConfiguration = {
             orchestrationID: "22fbea2f8f6673a0b658e7b0cfd612b9_7d8ad848-5570-443c-b964-849b503989d7",
             hostURL: "https://us-south.watson-orchestrate.cloud.ibm.com",
-            rootElementID: "container",
+            rootElementID: "root",
             showLauncher: true,
             crn: "crn:v1:bluemix:public:watsonx-orchestrate:us-south:a/22fbea2f8f6673a0b658e7b0cfd612b9:7d8ad848-5570-443c-b964-849b503989d7::",
             deploymentPlatform: "ibmcloud",
             chatOptions: {
-                agentId: "bbdc8a28-3f9c-494b-ba88-4476c37d8fe3",
-                agentEnvironmentId: "c085ea0b-2167-4149-9aa3-8aae075d226d",
+                agentId: "68841966-105b-4046-9ed3-632a1ffcaf41", 
+                agentEnvironmentId: "54fed7f7-d97e-4245-b5cd-aa276db2835f",
                 onLoad: onChatLoad
             },
             // The 'token' property will be added here by getIdentityToken()
@@ -627,6 +620,11 @@
     </footer>
     
     <!-- Root element for Watson Orchestrate -->
+    <!-- 
+      STEP 3: 
+      This is the DIV where the watsonx Orchestrate chat will be rendered.
+      The 'id="root"' matches the "rootElementID" in your configuration object.
+    -->
     <div id="root"></div>
     
     <!-- JavaScript for dropdown functionality -->
