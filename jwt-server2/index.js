@@ -16,10 +16,10 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
   // Get keys from environment variables
   // DECODE THE BASE64-ENCODED KEYS
   const PRIVATE_KEY_B64 = process.env.CLIENT_PRIVATE_KEY_B64;
-  const PUBLIC_KEY_B64 = process.env.CLIENT_PUBLIC_KEY_B64;
+  const PUBLIC_KEY_B64 = process.env.SERVER_PUBLIC_KEY_B64;
 
   if (!PRIVATE_KEY_B64 || !PUBLIC_KEY_B64) {
-    throw new Error('Missing CLIENT_PRIVATE_KEY_B64 or CLIENT_PUBLIC_KEY_B64 environment variables');
+    throw new Error('Missing CLIENT_PRIVATE_KEY_B64 or SERVER_PUBLIC_KEY_B64 environment variables');
   }
 
   const PRIVATE_KEY = Buffer.from(PRIVATE_KEY_B64, 'base64').toString('utf-8');
@@ -34,7 +34,9 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
       custom_message: 'Encrypted message',
       name: 'Anonymous',
     },
-    context
+    name: "Daniel Benner",
+    rank: "noob",
+    planet: "Earth"
   };
 
   // If the user is authenticated, then add the user's real info to the JWT
