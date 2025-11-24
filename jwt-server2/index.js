@@ -28,8 +28,9 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
   // This is the content of the JWT
   const jwtContent = {
     // This is the subject of the JWT which will be the ID of the user
-    //sub: anonymousUserID,
+    sub: anonymousUserID,
     // This object is optional and contains any data you wish to include as part of the JWT
+    woTenantId: tenantId,
     user_payload: {
       custom_message: 'Encrypted message',
       name: 'Anonymous',
@@ -119,6 +120,9 @@ function main(args) {
     // Session info can be passed in the request body
     const sessionInfo = args.sessionInfo || null;
     
+    // 
+    const woTenantId = "22fbea2f8f6673a0b658e7b0cfd612b9_7d8ad848-5570-443c-b964-849b503989d7"
+
     // Context can be customized or use defaults
     const context = {
       name: 'Daniel Benner',
