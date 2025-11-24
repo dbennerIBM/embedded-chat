@@ -31,14 +31,10 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
     sub: anonymousUserID,
     // This object is optional and contains any data you wish to include as part of the JWT
     user_payload: {
-      custom_message: 'Welcome to the multiverse, Daniel',
-      name: 'The System',
+      custom_message: 'Encrypted message',
+      name: 'Anonymous',
     },
-    context: {
-      name: "Daniel Benner",
-      rank: "noob",
-      planet: "Earth"
-    }
+    context
   };
 
   // If the user is authenticated, then add the user's real info to the JWT
@@ -140,9 +136,7 @@ function main(args) {
         'Set-Cookie': `ANONYMOUS-USER-ID=${anonymousUserID}; Max-Age=${Math.floor(TIME_45_DAYS / 1000)}; HttpOnly; Path=/`
       },
       body: {
-        token: token,
-        anonymousUserId: anonymousUserID,
-        message: 'JWT generated successfully'
+        token: token
       }
     };
   } catch (error) {
