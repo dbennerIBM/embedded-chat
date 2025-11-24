@@ -28,7 +28,7 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
   // This is the content of the JWT
   const jwtContent = {
     // This is the subject of the JWT which will be the ID of the user
-    sub: anonymousUserID,
+    //sub: anonymousUserID,
     // This object is optional and contains any data you wish to include as part of the JWT
     user_payload: {
       custom_message: 'Encrypted message',
@@ -36,7 +36,7 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
       rank: 'noob',
       planet: 'earth'
     },
-    context
+    context,
   };
 
   // If the user is authenticated, then add the user's real info to the JWT
@@ -120,7 +120,11 @@ function main(args) {
     const sessionInfo = args.sessionInfo || null;
     
     // Context can be customized or use defaults
-    const context = {'name': 'Daniel Benner','rank': 'noob','planet': 'Earth'};
+    const context = {
+      name: 'Daniel Benner',
+      rank: 'noob',
+      planet: 'Earth'
+    };
 
     // Generate the JWT
     const token = createJWTString(anonymousUserID, sessionInfo, context);
