@@ -33,6 +33,8 @@ function createJWTString(anonymousUserID, sessionInfo, context) {
     user_payload: {
       custom_message: 'Encrypted message',
       name: 'Anonymous',
+      rank: 'noob',
+      planet: 'earth'
     },
     context
   };
