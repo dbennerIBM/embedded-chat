@@ -121,9 +121,9 @@ function main(args) {
     
     // Context can be customized or use defaults
     const context = {
-      name: "Daniel Benner",
-      rank: "noob",
-      planet: "Earth"
+      name: 'Daniel Benner',
+      rank: 'noob',
+      planet: 'Earth'
     };
 
     // Generate the JWT
