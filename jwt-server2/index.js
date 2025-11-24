@@ -120,11 +120,7 @@ function main(args) {
     const sessionInfo = args.sessionInfo || null;
     
     // Context can be customized or use defaults
-    const context = {
-      name: 'Daniel Benner',
-      rank: 'noob',
-      planet: 'Earth'
-    };
+    const context = {'name': 'Daniel Benner','rank': 'noob','planet': 'Earth'};
 
     // Generate the JWT
     const token = createJWTString(anonymousUserID, sessionInfo, context);
